@@ -18,6 +18,15 @@ _start:
     in al, 0x92
     or al, 2
     out 0x92, al
+
+    ; Remap the master PIC
+    mov al, 00010001b ; Init master PIC
+    out 0x20, al       
+    mov al, 0x20      ; Map to offset 0x20 in Interrupt vector table
+    out 0x21, al
+    mov al, 00000001b ; Set PIC to 8086 mode
+    out 0x21, al
+    sti ;Enable interupts
     call kernel_main
     jmp $
 
