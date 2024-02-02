@@ -10,6 +10,8 @@ struct idtr_desc idtr_descriptor;
 extern void idt_load(struct idtr_desc* ptr);
 extern void int21h();
 extern void no_interrupt();
+extern void disable_interrupts();
+extern void enable_interrupts();
 
 void int21h_handler(){
     print("Keyboard pressed\n");

@@ -26,7 +26,6 @@ _start:
     out 0x21, al
     mov al, 00000001b ; Set PIC to 8086 mode
     out 0x21, al
-    sti ;Enable interupts
     call kernel_main
     jmp $
 

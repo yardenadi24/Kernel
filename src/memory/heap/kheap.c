@@ -2,6 +2,7 @@
 #include "heap.h"
 #include "config.h"
 #include "kernel.h"
+#include "memory/memory.h"
 
 // (100MB) = 1024x1024x100 = 1048576x100 = 104857600 Bytes
 // Our block size is (4KB) 1024x4 = 4096
@@ -28,6 +29,17 @@ void kheap_init()
 void* kmalloc(size_t size)
 {
     return heap_malloc(&kernel_heap,size);
+}
+
+void* kzalloc(size_t size)
+{
+    void* address = kmalloc(size);
+    if(!address)
+    {
+        return 0;
+    }
+    memset(address,0,size);
+    return address;
 }
 
 void kfree(void* ptr)

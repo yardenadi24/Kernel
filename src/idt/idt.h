@@ -19,5 +19,7 @@ struct idtr_desc
 
 void idt_set();
 void idt_init();
+void disable_interrupts();
+void enable_interrupts();
 
 #endif
