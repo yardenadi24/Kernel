@@ -5,6 +5,7 @@
 #include "io/io.h"
 #include "memory/heap/kheap.h"
 #include "memory/paging/paging.h"
+#include "disk/disk.h"
 
 uint16_t* video_mem = 0;
 uint16_t terminal_row = 0;
@@ -80,10 +81,12 @@ static struct paging_4gb_chuck* kernel_chuck = 0;
 void kernel_main()
 {
     terminal_initializer();
-    print("Test\n");
     
     //Init heap
     kheap_init();
+
+    //Search and init disks
+    disk_search_and_init();
 
     // Init Interrupt descriptor table;
     idt_init();
@@ -99,4 +102,6 @@ void kernel_main()
 
     // Enable interrupts
     enable_interrupts();
+
+    print("Finish init\n");
 }
